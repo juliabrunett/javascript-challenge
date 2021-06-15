@@ -1,0 +1,62 @@
+.wrapper {
+
+}
+
+.navbar {
+    color:aquamarine;
+}
+
+.ufo-pic {
+
+}
+
+/*url:https://unsplash.com/photos/73osnYZ133o*/
+.hero {
+    position:relative;
+    height: 600px;
+    padding: 20px;
+    margin: 0;
+    background: black;
+    background-image: url(../images/night_sky.jpg);
+    background-attachment: fixed;
+    background-position: bottom center;
+    background-size: cover;
+}
+
+.hero h1 {
+    font-size: 50px;
+    margin-top: 200px;
+    color: white;
+}
+
+.hero p {
+    font-size: 30px;
+    color: lightskyblue;
+}
+.filters {
+
+}
+
+.panel {
+
+}
+
+.form-group {
+
+}
+
+.list-group {
+
+}
+
+#filter-button {
+
+}
+
+#ufo-table {
+
+}
+
+.table-head {
+
+}
