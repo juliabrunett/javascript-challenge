@@ -24,10 +24,16 @@ function runEnter() {
     console.log("Date: ", inputDatetime);
 
     // Filter the table for the selected date
-    var filteredData = tableData.filter(date => date.datetime === inputDatetime);
+    var filteredData = tableData.filter(element => element.datetime === inputDatetime);
 
     // Print the sightings for the date in the console
-    //console.log("Sightings: ", filteredData);
+    console.log("Sightings: ", filteredData);
+
+    // Select the tbody
+    var tbody = d3.select("tbody");
+
+    // Remove previous filtered data from the table
+    tbody.html("");
 
     // Loop through the tbody
     filteredData.forEach(function(sightings) {

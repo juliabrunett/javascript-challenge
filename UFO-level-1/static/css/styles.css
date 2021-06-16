@@ -1,20 +1,32 @@
 .navbar {
     padding: 10px;
     margin: 0;
-    background-color: #494c57;
+    background-color: lightblue;
 }
 
-a {
-    color:#f2c757;
+/* Navbar header box */
+.navbar-header {
+    background-color: white;
+    width: 180px;
 }
+
+/* Navbar Title */
+a {
+    color:#f5b513;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+/* UFO icon from flaticon */
 .ufo-pic {
     position: absolute;
     bottom: 5px;
     left: 160px;
     width: 35px;
-    background-color: lightgray;
+    
 }
 
+/* Filters */
 .filters {
     margin-top: 10px;
 }
@@ -23,12 +35,21 @@ a {
     padding: 0;
 }
 
+/* Paragraph tag for panel body: notes for search */
+.filters .panel-body p {
+    font-size: 15px;
+    text-align: center;
+}
+
 #filter-button {
     background-color: lightblue;
     position: relative;
 }
+
 .panel-heading {
     text-align: center;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /* url:https://unsplash.com/photos/73osnYZ133o */
@@ -45,13 +66,13 @@ a {
 }
 
 .hero h1 {
-    font-size: 50px;
-    margin-top: 200px;
+    font-size: 80px;
+    margin-top: 150px;
     color: white;
 }
 
 .hero p {
-    font-size: 30px;
+    font-size: 50px;
     color: lightskyblue;
 }
 
@@ -101,7 +122,13 @@ body {
     position: absolute;
     font-size: 12px;
     bottom: 5px;
-    left: 200px;
+    left: 120px;
+    color: #f2c757;
+}
+
+/* Attribution: attribute tags */
+.attribution a {
+    font-size: 11px;
     color: #f2c757;
 }
 
@@ -142,7 +169,6 @@ select {
 .margin-top-50 {
     margin-top: 50px;
 }
-
 
   /* media queries which will only be activated at specific screen sizes */
 @media (max-width: 800px) {
