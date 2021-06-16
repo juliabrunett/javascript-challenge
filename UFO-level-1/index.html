@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
@@ -20,7 +21,8 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">UFO Sightings
-                        <img class="ufo-pic" src="static/images/ufo_pic.svg"/>
+                        <img class="ufo-pic" src="static/images/ufo.svg"/>
+                        <div class="attribution">Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     </a>
                 </div>
             </div>
@@ -34,33 +36,54 @@
 
         <!--Container-->
         <div class="container">
+            <!--Row-->
             <div class="row margin-top-50">
+                <!--Column for Input Form-->
                 <div class="col-md-2">
+                    <!--Aside with class: filters-->
                     <aside class="filters">
+                        <!--Panel-->
                         <div class="panel panel-default">
-                            <div class="panel-heading">Search</div>
+                            <!--Panel Heading-->
+                            <div class="panel-heading">Search a Date</div>
+                            <!--Panel Body-->
                             <div class="panel-body">
-                                <form>
+
+                                <!--Form-->
+                                <form id="form">
+                                    <!--Form Group-->
                                     <div class="form-group">
+                                        <!--List Group: Unordered-->
                                         <ul class="list-group" id="filters">
+                                            <!--List-->
                                             <li class="filter list-group-item">
+                                                <!--Label for Form-->
                                                 <label for="date">Enter a Date:</label>
-                                                <input class="form-control" id="datetime" type="text" placeholder="01/01/2021">
+                                                <!--Input: for date-->
+                                                <input class="form-control" id="datetime" type="text" placeholder="01/01/2010">
                                             </li>
                                         </ul>
                                     </div>
+
+                                    <!--Button for submitting form-->
                                     <button id="filter-button" type="button" class="btn btn-default">Filter Table</button>
                                 </form>
+
                             </div>
                         </div>
                     </aside>
                 </div>
 
                 <!--Table of Data-->
+                <!--Column-->
                 <div class="col-md-10">
-                    <div id="table-area" class="">
+                    <!--Table area-->
+                    <div id="table-area">
+                        <!--UFO Table-->
                         <table id="ufo-table" class="table table-striped">
+                        <!--Table Headers-->
                         <thead>
+                            <!--Table Rows: Headers-->
                             <tr>
                                 <th class="table-head">Date</th>
                                 <th class="table-head">City</th>
@@ -71,6 +94,7 @@
                                 <th class="table-head">Comments</th>
                             </tr>
                         </thead>
+                        <!--Tbody-->
                         <tbody></tbody>
                         </table>
                     </div>
@@ -85,10 +109,11 @@
 
     </div>  
 
-    <!--Import JavaScript & d3.js-->
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="static/js/app.js"></script>
-    <script src="static/js/data.js"></script>
+    
 
 </body>
+<!--Import JavaScript-->
+<script src="static/js/data.js"></script>
+<script src="static/js/app.js"></script>
+
 </html>
