@@ -52,7 +52,49 @@ function runEnter() {
             var data_cell = row.append("td").text(value);
         });
     });
+};
 
+var cityDropdown = d3.select("#city-dropdown");
+var stateDropdown = d3.select("#stateDropdown");
+var countryDropdown = d3.select("#countryDropdown");
+var shapeDropdown = d3.select("#shapeDropdown");
 
-}
+var cityName = tableData.map(sighting => sighting.city)
+console.log(cityName);
 
+cityName.forEach(city => {
+    //console.log(city);
+    var item = cityDropdown.append("a")
+    item.attr("class", "dropdown-item")
+    item.text(city);
+});
+
+var stateName = tableData.map(sighting => sighting.state)
+console.log(stateName);
+
+stateName.forEach(state => {
+    //console.log(state);
+    var item = stateDropdown.append("a")
+    item.attr("class", "dropdown-item")
+    item.text(state);
+});
+
+var countryName = tableData.map(sighting => sighting.country)
+console.log(countryName);
+
+cityName.forEach(country => {
+    //console.log(country);
+    var item = countryDropdown.append("a")
+    item.attr("class", "dropdown-item")
+    item.text(country);
+});
+
+var shapeName = tableData.map(sighting => sighting.shape)
+console.log(shapeName);
+
+shapeName.forEach(shape => {
+    //console.log(city);
+    var item = shapeDropdown.append("a")
+    item.attr("class", "dropdown-item")
+    item.text(shape);
+});

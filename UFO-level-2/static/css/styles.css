@@ -12,6 +12,16 @@ a {
     margin-left: 10px;
 }
 
+.dropdown-menu a {
+    font-size: 12px;
+}
+
+/* Make dropdown smaller */
+.dropdown-menu {         
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 /* UFO icon from flaticon */
 .ufo-pic {
     position: absolute;
