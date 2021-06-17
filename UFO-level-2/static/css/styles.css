@@ -1,0 +1,224 @@
+/* Navbar */
+.navbar {
+    padding: 10px;
+    margin: 0;
+    background-color: lightblue;
+}
+
+/* Navbar Title */
+a {
+    color:#194a8b;
+    font-size: 50px;
+    margin-left: 10px;
+}
+
+/* UFO icon from flaticon */
+.ufo-pic {
+    position: absolute;
+    bottom: 10px;
+    left: 165px;
+    width: 35px;
+    
+}
+
+/* Filters */
+.filters {
+    margin-top: 10px;
+}
+
+/* Filters: Panel Body */
+.filters .panel-body {
+    padding: 0;
+}
+
+/* Paragraph tag for panel body: notes for search */
+.filters .panel-body p {
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+/* h2 tag for panel body: notes for search heading */
+.filters .panel-body h2 {
+    font-size: 15px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+/* Filter button for search */
+#filter-button {
+    background-color: lightblue;
+    position: relative;
+    margin-right: 20px;
+    margin-left: 30px;
+}
+
+/* Panel Heading */
+.panel-heading {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Label for filter */
+label {
+    font-weight: bold;
+}
+/* url:https://unsplash.com/photos/73osnYZ133o */
+.hero {
+    position:relative;
+    height: 600px;
+    padding: 20px;
+    margin: 0;
+    background: black;
+    background-image: url(../images/night_sky.jpg);
+    background-attachment: fixed;
+    background-position: bottom center;
+    background-size: cover;
+}
+
+/* Main text: heading */
+.hero h1 {
+    font-size: 80px;
+    margin-top: 150px;
+    color: white;
+}
+
+/* Main text: paragraph */
+.hero p {
+    font-size: 40px;
+    color: lightskyblue;
+}
+
+/* Whole document */
+* {
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* HTML and body tags */
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Wrapper: whole page except footer */
+.wrapper {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 130px;
+    overflow: auto;
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 100px;
+    background: #f2c757;
+}
+
+/* Bottom of the footer */
+.footer > .bottom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    background: #494c57;
+    color: white;
+}
+
+/* Attribution for flaticon */
+.attribution {
+    position: absolute;
+    font-size: 12px;
+    bottom: 5px;
+    left: 120px;
+    color: #f2c757;
+}
+
+/* Attribution: attribute tags */
+.attribution a {
+    font-size: 11px;
+    color: #f2c757;
+    margin-left: 0px;
+}
+
+/* UFO form */
+.ufo-form {
+    margin-top: 50px;
+}
+
+/* Select */
+select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    color: #8e979f;
+    outline: none;
+}
+
+/* Table Headers */
+#table-area th {
+    text-align: center;
+}
+
+/* Loader */
+.loader {
+    margin-top: 50px;
+}
+
+/* Set: Margin Top 75 */
+.margin-top-75 {
+    margin-top: 75px;
+}
+
+  /* media queries which will only be activated at specific screen sizes */
+@media (max-width: 800px) {
+    #table-area td {
+    font-size: 1em;
+    }
+/* Main text: heading */
+.hero h1 {
+    font-size: 65px;
+    margin-top: 150px;
+}
+
+/* Main text: paragraph */
+.hero p {
+    font-size: 30px;
+}
+
+}
+
+@media (max-width: 500px) {
+    #table-area thead {
+    display: none;
+    }
+
+    #table-area td {
+        font-size: 1.25em;
+    }
+
+    #table-area tbody td {
+        display: block;
+        text-align: center;
+    }
+
+/* Main text: heading */
+.hero h1 {
+    font-size: 50px;
+    margin-top: 130px;
+}
+
+/* Main text: paragraph */
+.hero p {
+    font-size: 20px;
+}
+
+}
