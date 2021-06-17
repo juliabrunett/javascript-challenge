@@ -20,8 +20,10 @@ function runEnter() {
     // Input datetime
     var inputDatetime = d3.select("#datetime").property("value");
 
+    if (inputDatetime)
     // Print the input date in the console
     console.log("Date: ", inputDatetime);
+
 
     // Filter the table for the selected date
     var filteredData = tableData.filter(element => element.datetime === inputDatetime);
