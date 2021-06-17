@@ -17,13 +17,13 @@ function runEnter() {
     // Keep the page from refreshing
     d3.event.preventDefault();
 
-    // Input datetime
+    // Select the input datetime
     var inputDatetime = d3.select("#datetime").property("value");
 
-    if (inputDatetime)
     // Print the input date in the console
     console.log("Date: ", inputDatetime);
-
+    // Add chosen input date into span tag (on page)
+    d3.select("label>span").text(inputDatetime);
 
     // Filter the table for the selected date
     var filteredData = tableData.filter(element => element.datetime === inputDatetime);
@@ -31,22 +31,25 @@ function runEnter() {
     // Print the sightings for the date in the console
     console.log("Sightings: ", filteredData);
 
-    // Select the tbody
+    // Select the tbody in the html table
     var tbody = d3.select("tbody");
 
     // Remove previous filtered data from the table
     tbody.html("");
 
-    // Loop through the tbody
-    filteredData.forEach(function(sightings) {
+    // Loop through the filtered data array of objects
+    filteredData.forEach(sightings => {
+
+        // Print each object in the console
         console.log(sightings);
+        // Append a row to the tbody
         var row = tbody.append("tr");
     
-        Object.entries(sightings).forEach(function([key, value]) {
+
+        Object.entries(sightings).forEach(([key, value]) => {
             console.log(key, value);
     
-            var cell = row.append("td");
-            cell.text(value);
+            var data_cell = row.append("td").text(value);
         });
     });
 

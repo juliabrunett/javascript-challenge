@@ -5,12 +5,6 @@
     background-color: lightblue;
 }
 
-/* Navbar header box 
-.navbar-header {
-    background-color: white;
-    width: 180px;
-}*/
-
 /* Navbar Title */
 a {
     color:#194a8b;
@@ -41,6 +35,14 @@ a {
 .filters .panel-body p {
     font-size: 15px;
     text-align: center;
+    
+}
+
+/* h2 tag for panel body: notes for search heading */
+.filters .panel-body h2 {
+    font-size: 15px;
+    text-align: center;
+    text-decoration: underline;
 }
 
 /* Filter button for search */
@@ -58,6 +60,10 @@ a {
     font-weight: bold;
 }
 
+/* Label for filter */
+label {
+    font-weight: bold;
+}
 /* url:https://unsplash.com/photos/73osnYZ133o */
 .hero {
     position:relative;
@@ -140,6 +146,7 @@ body {
 .attribution a {
     font-size: 11px;
     color: #f2c757;
+    margin-left: 0px;
 }
 
 /* UFO form */
@@ -166,9 +173,9 @@ select {
     margin-top: 50px;
 }
 
-/* Set: Margin Top 50 */
-.margin-top-50 {
-    margin-top: 50px;
+/* Set: Margin Top 75 */
+.margin-top-75 {
+    margin-top: 75px;
 }
 
   /* media queries which will only be activated at specific screen sizes */
