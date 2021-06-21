@@ -12,6 +12,11 @@ a {
     margin-left: 10px;
 }
 
+/* Filter Options: paragraph */
+.chosen-options p {
+    font-weight: bold;
+}
+
 /* Dropdown menu text */
 .dropdown-menu a {
     font-size: 16px;
@@ -19,8 +24,20 @@ a {
 
 /* Make dropdown smaller */
 .dropdown-menu {         
-    max-height: 300px;
+    max-height: 150px;
     overflow-y: auto;
+}
+
+/* Dropdown buttons */
+.dropdown button {
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    background-color: lightblue;
+    border-color: black;
+    color: black;
+
 }
 
 /* UFO icon from flaticon */
@@ -43,33 +60,41 @@ a {
 }
 
 /* Paragraph tag for panel body: notes for search */
-.filters .panel-body p {
+#search-notes p {
     font-size: 15px;
     text-align: center;
     
 }
 
 /* h2 tag for panel body: notes for search heading */
-.filters .panel-body h2 {
+#search-notes h2 {
     font-size: 15px;
     text-align: center;
     text-decoration: underline;
+}
+
+/* Notes for Search box */
+#search-notes {
+    padding: 10px;
 }
 
 /* Filter button for search */
 #filter-button {
     background-color: lightblue;
     position: relative;
-    margin-right: 20px;
-    margin-left: 30px;
+    margin-top: 10px;
+    border-color: black;
+    
 }
 
-/* Filter button for search */
+/* Reset button */
 #reset-button {
-    background-color: lightyellow;
+    background-color: #f2c757;
     position: relative;
+    margin-bottom: 10px;
     margin-right: 20px;
     margin-left: 30px;
+    border-color: black;
 }
 
 /* Panel Heading */
