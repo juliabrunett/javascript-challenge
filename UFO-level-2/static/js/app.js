@@ -16,11 +16,29 @@ date_button.on("click", runEnter);
 form.on("submit", runEnter);
 reset_button.on("click", runReset);
 
+// Define "continue filter" for multi-filtering
+var continueFilter = [];
+// Define selection variable & type variable for multi-filtering
+var selVariable = [];
+var type = [];
+
+// Define the reset button function
 function runReset() {
     // Select the tbody in the html table
     var tbody = d3.select("tbody");
     tbody.html("");
+
+    // Reset continue filter
+    selVariable = [];
+    type = [];
 };
+
+// Define the reset button (only resets HTML - when needed)
+function runHTMLReset() {
+    // Select the tbody in the html table
+    var tbody = d3.select("tbody");
+    tbody.html("");
+}
 
 // Function for running when entered
 function runEnter() {
@@ -160,71 +178,8 @@ uniqueShapeNames.forEach(shape => {
     item.text(shape);
 });
 
-// // SHOW which button was clicked in the console
-// // On click -- run the function
-// cityButton.on("click", function() {
-//     var selCityButton = d3.select(this).text();
-//     console.log(selCityButton);
 
-//     d3.selectAll("option").on("click", function() {
-//         var selCity = d3.select(this).text();
-//         console.log(selCity);
-    
-//         // Run the select function
-//         runSelect(selCity, "city");
-//     });
-    
-// });
-
-// // On click -- run the function
-// stateButton.on("click", function() {
-//     var selStateButton = d3.select(this).text();
-//     console.log(selStateButton);
-
-//     d3.selectAll("option").on("click", function() {
-//         var selState = d3.select(this).text();
-//         console.log(selState);
-
-//         // Run the select function
-//         runSelect(selState, "state");
-//     });
-// });
-
-// // On click -- run the function
-// countryButton.on("click", function() {
-//     var selCountryButton = d3.select(this).text();
-//     console.log(selCountryButton);
-
-//     d3.selectAll("option").on("click", function() {
-//         var selCountry = d3.select(this).text();
-//         console.log(selCountry);
-
-//         // Run the select function
-//         runSelect(selCountry, "country");
-//     });
-// });
-
-// // On click -- run the function
-// shapeButton.on("click", function() {
-//     var selShapeButton = d3.select(this).text();
-//     console.log(selShapeButton);
-
-//     d3.selectAll("option").on("click", function() {
-//         var selShape = d3.select(this).text();
-//         console.log(selShape);
-
-//         if (tbody.html() === "") {
-//         // Run the select function
-//         runSelect(selShape, "shape", "new");
-//         }
-//         else {
-//             runSelect(selShape, "shape", "filtered");
-//         };
-// });
-// });
-
-var continueFilter = [];
-
+// SHOW which button was clicked in the console
 d3.selectAll("#dropdownMenuButton").on("click", function() {
     var selButton = d3.select(this).text();
     console.log(selButton);
@@ -235,14 +190,15 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
 
     // Print the option in the console
     console.log("Option: ", selOption);
-    
+
+
     if (selButton === "City") {
-        var selVariable = selOption;
-        var type = "city";
-        var status = "new";
+        selVariable.push(selOption);
+        type.push("city");
+        
         d3.select("#chosen-option-city").text(`${selButton}: ${selOption}`);
 
-        // if (continueFilter.length != 0) {
+        // if (continueFilter.length === 0) {
         //     continueFilter.push(selButton);
         // }
         // else {
@@ -250,45 +206,63 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         // }
     }
     else if (selButton === "State") {
-        var selVariable = selOption;
-        var type = "state";
-        var status = "new";
+        selVariable.push(selOption);
+        type.push("state");
+        
         d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
+
+        // if (continueFilter.length === 0) {
+        //     continueFilter.push(selButton);
+        // }
+        // else {
+        //     status = "filtered"
+        // }
     }
     else if (selButton === "Country") {
-        var selVariable = selOption;
-        var type = "country";
-        var status = "new";
+        selVariable.push(selOption);
+        type.push("country");
+        
         d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
+
+        // if (continueFilter.length === 0) {
+        //     continueFilter.push(selButton);
+        // }
+        // else {
+        //     status = "filtered"
+        // }
     }
     else if (selButton === "Shape") {
-        var selVariable = selOption;
-        var type = "shape";
-        var status = "new";
+        selVariable.push(selOption);
+        type.push("shape");
+    
         d3.select("#chosen-option-shape").text(`${selButton}: ${selOption}`);
+
+        // if (continueFilter.length === 0) {
+        //     continueFilter.push(selButton);
+        // }
+        // else {
+        //     status = "filtered"
+        // }
     }
 
+    runSelect(type, selVariable);
     console.log(selVariable);
     console.log(type);
-    console.log(status);
-
-    runSelect(selVariable, type, status);
 
 }); 
 });
 
 // The select function (filters by each parameter)
-function runSelect(selVariable, type, status) {
+function runSelect(type, selVariable) {
 
-    runReset();
+    // runReset();
 
-    if (status === "new") {
+    for (var i=0; i < selVariable.length; i++) {
+        runHTMLReset();
         // Filter the data to the selection
-        var filteredData = tableData.filter(element => element[type] === selVariable);
-    }
-    else if (status === "filtered") {
-        filteredData = filteredData.filter(element => element[type] === selVariable);
-    };
+        var newFilteredData = tableData.filter(element => element[type[i-1]] === selVariable[i-1]);
+        var filteredData = newFilteredData.filter(element => element[type[i]] === selVariable[i]);
+    
 
     d3.event.preventDefault();
 
@@ -302,15 +276,23 @@ function runSelect(selVariable, type, status) {
         var tbody = d3.select("tbody");
 
         // Print each object in the console
-        console.log(sightings);
+        // console.log(sightings);
+
         // Append a row to the tbody
         var row = tbody.append("tr");
 
 
         Object.entries(sightings).forEach(([key, value]) => {
-            console.log(key, value);
+            // console.log(key, value);
 
             var data_cell = row.append("td").text(value);
         });
+
+        
     });
+};
+
+    var num_results = filteredData.length;
+        d3.select("#num-results").text(`Showing ${num_results} Results`);
+    //return filteredData;
 };
