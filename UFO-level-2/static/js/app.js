@@ -85,7 +85,6 @@ var setCityNames = new Set(cityName);
 // Convert the set back into an array
 var uniqueCityNames = Array.from(setCityNames);
 
-
 // For each city, append the name to a dropdown attribute
 uniqueCityNames.forEach(city => {
     //console.log(city);
@@ -94,6 +93,7 @@ uniqueCityNames.forEach(city => {
     item.attr("class", "dropdown-item");
     item.text(city);
 });
+
 
 // Create a state name array
 var stateName = tableData.map(sighting => sighting.state);
@@ -108,11 +108,11 @@ var uniqueStateNames = Array.from(setStateNames);
 
 // For each state, append the name to a dropdown attribute
 uniqueStateNames.forEach(state => {
-    console.log(state);
     var item = stateDropdown.append("option");
     item.attr("class", "dropdown-item");
     item.text(state);
 });
+
 
 // Create a country name array
 var countryName = tableData.map(sighting => sighting.country)
@@ -131,6 +131,7 @@ uniqueCountryNames.forEach(country => {
     item.attr("class", "dropdown-item")
     item.text(country);
 });
+
 
 // Create a shape name array
 var shapeName = tableData.map(sighting => sighting.shape)
@@ -159,7 +160,36 @@ cityButton.on("click", function() {
     d3.selectAll("option").on("click", function() {
         var selCity = d3.select(this).text();
         console.log(selCity);
+
+    var filteredData = tableData.filter(element => element.city === selCity);
+
+    // Print the sightings for the city in the console
+    console.log("Sightings: ", filteredData);
+
+    // Select the tbody in the html table
+    var tbody = d3.select("tbody");
+
+    // Remove previous filtered data from the table
+    tbody.html("");
+
+    // Loop through the filtered data array of objects
+    filteredData.forEach(sightings => {
+
+        // Print each object in the console
+        console.log(sightings);
+        // Append a row to the tbody
+        var row = tbody.append("tr");
+    
+
+        Object.entries(sightings).forEach(([key, value]) => {
+            console.log(key, value);
+    
+            var data_cell = row.append("td").text(value);
+        });
     });
+    });
+    
+
 
 });
 
@@ -171,6 +201,33 @@ stateButton.on("click", function() {
     d3.selectAll("option").on("click", function() {
         var selState = d3.select(this).text();
         console.log(selState);
+
+    var filteredData = tableData.filter(element => element.state === selState);
+
+    // Print the sightings for the city in the console
+    console.log("Sightings: ", filteredData);
+
+    // Select the tbody in the html table
+    var tbody = d3.select("tbody");
+
+    // Remove previous filtered data from the table
+    tbody.html("");
+
+    // Loop through the filtered data array of objects
+    filteredData.forEach(sightings => {
+
+        // Print each object in the console
+        console.log(sightings);
+        // Append a row to the tbody
+        var row = tbody.append("tr");
+    
+
+        Object.entries(sightings).forEach(([key, value]) => {
+            console.log(key, value);
+    
+            var data_cell = row.append("td").text(value);
+        });
+    });
     });
 });
 
@@ -182,6 +239,33 @@ countryButton.on("click", function() {
     d3.selectAll("option").on("click", function() {
         var selCountry = d3.select(this).text();
         console.log(selCountry);
+
+        var filteredData = tableData.filter(element => element.country === selCountry);
+
+    // Print the sightings for the city in the console
+    console.log("Sightings: ", filteredData);
+
+    // Select the tbody in the html table
+    var tbody = d3.select("tbody");
+
+    // Remove previous filtered data from the table
+    tbody.html("");
+
+    // Loop through the filtered data array of objects
+    filteredData.forEach(sightings => {
+
+        // Print each object in the console
+        console.log(sightings);
+        // Append a row to the tbody
+        var row = tbody.append("tr");
+    
+
+        Object.entries(sightings).forEach(([key, value]) => {
+            console.log(key, value);
+    
+            var data_cell = row.append("td").text(value);
+        });
+    });
     });
 });
 
@@ -193,15 +277,37 @@ shapeButton.on("click", function() {
     d3.selectAll("option").on("click", function() {
         var selShape = d3.select(this).text();
         console.log(selShape);
+
+        var filteredData = tableData.filter(element => element.shape === selShape);
+
+    // Print the sightings for the city in the console
+    console.log("Sightings: ", filteredData);
+
+    // Select the tbody in the html table
+    var tbody = d3.select("tbody");
+
+    // Remove previous filtered data from the table
+    tbody.html("");
+
+    // Loop through the filtered data array of objects
+    filteredData.forEach(sightings => {
+
+        // Print each object in the console
+        console.log(sightings);
+        // Append a row to the tbody
+        var row = tbody.append("tr");
+    
+
+        Object.entries(sightings).forEach(([key, value]) => {
+            console.log(key, value);
+    
+            var data_cell = row.append("td").text(value);
+        });
     });
+    });
+
+    
 });
-
-function runFilter() {
-    if (citySelect === city) {
-        var newFilter = tableData.filter(city => city.name === city)
-    }
-
-}
 
 // Function for running when option selected
 function runSelect() {
