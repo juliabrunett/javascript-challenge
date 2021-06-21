@@ -5,12 +5,22 @@ var tableData = data;
 // Select the form 
 var form = d3.select("#form");
 
-// Select the button
+// Select the date button
 var date_button = d3.select("#filter-button");
+
+var reset_button = d3.select("#reset-button");
+
 
 // Create event handlers for clicking the button & submitting the form
 date_button.on("click", runEnter);
 form.on("submit", runEnter);
+reset_button.on("click", runReset);
+
+function runReset() {
+    // Select the tbody in the html table
+    var tbody = d3.select("tbody");
+    tbody.html("");
+};
 
 // Function for running when entered
 function runEnter() {
@@ -36,7 +46,7 @@ function runEnter() {
     var tbody = d3.select("tbody");
 
     // Remove previous filtered data from the table
-    tbody.html("");
+    // tbody.html("");
 
     // Loop through the filtered data array of objects
     filteredData.forEach(sightings => {
@@ -89,7 +99,6 @@ var uniqueCityNames = Array.from(setCityNames);
 uniqueCityNames.forEach(city => {
     //console.log(city);
     var item = cityDropdown.append("option");
-    item.attr("id", city);
     item.attr("class", "dropdown-item");
     item.text(city);
 });
@@ -151,216 +160,156 @@ uniqueShapeNames.forEach(shape => {
     item.text(shape);
 });
 
-// Show which button was clicked in the console
-// On click -- run the function
-cityButton.on("click", function() {
-    var selCityButton = d3.select(this).text();
-    console.log(selCityButton);
+// // SHOW which button was clicked in the console
+// // On click -- run the function
+// cityButton.on("click", function() {
+//     var selCityButton = d3.select(this).text();
+//     console.log(selCityButton);
+
+//     d3.selectAll("option").on("click", function() {
+//         var selCity = d3.select(this).text();
+//         console.log(selCity);
+    
+//         // Run the select function
+//         runSelect(selCity, "city");
+//     });
+    
+// });
+
+// // On click -- run the function
+// stateButton.on("click", function() {
+//     var selStateButton = d3.select(this).text();
+//     console.log(selStateButton);
+
+//     d3.selectAll("option").on("click", function() {
+//         var selState = d3.select(this).text();
+//         console.log(selState);
+
+//         // Run the select function
+//         runSelect(selState, "state");
+//     });
+// });
+
+// // On click -- run the function
+// countryButton.on("click", function() {
+//     var selCountryButton = d3.select(this).text();
+//     console.log(selCountryButton);
+
+//     d3.selectAll("option").on("click", function() {
+//         var selCountry = d3.select(this).text();
+//         console.log(selCountry);
+
+//         // Run the select function
+//         runSelect(selCountry, "country");
+//     });
+// });
+
+// // On click -- run the function
+// shapeButton.on("click", function() {
+//     var selShapeButton = d3.select(this).text();
+//     console.log(selShapeButton);
+
+//     d3.selectAll("option").on("click", function() {
+//         var selShape = d3.select(this).text();
+//         console.log(selShape);
+
+//         if (tbody.html() === "") {
+//         // Run the select function
+//         runSelect(selShape, "shape", "new");
+//         }
+//         else {
+//             runSelect(selShape, "shape", "filtered");
+//         };
+// });
+// });
+
+var continueFilter = [];
+
+d3.selectAll("#dropdownMenuButton").on("click", function() {
+    var selButton = d3.select(this).text();
+    console.log(selButton);
 
     d3.selectAll("option").on("click", function() {
-        var selCity = d3.select(this).text();
-        console.log(selCity);
+        var selOption = d3.select(this).text();
+        console.log(selOption);
 
-    var filteredData = tableData.filter(element => element.city === selCity);
-
-    // Print the sightings for the city in the console
-    console.log("Sightings: ", filteredData);
-
-    // Select the tbody in the html table
-    var tbody = d3.select("tbody");
-
-    // Remove previous filtered data from the table
-    tbody.html("");
-
-    // Loop through the filtered data array of objects
-    filteredData.forEach(sightings => {
-
-        // Print each object in the console
-        console.log(sightings);
-        // Append a row to the tbody
-        var row = tbody.append("tr");
+    // Print the option in the console
+    console.log("Option: ", selOption);
     
+    if (selButton === "City") {
+        var selVariable = selOption;
+        var type = "city";
+        var status = "new";
+        d3.select("#chosen-option-city").text(`${selButton}: ${selOption}`);
 
-        Object.entries(sightings).forEach(([key, value]) => {
-            console.log(key, value);
-    
-            var data_cell = row.append("td").text(value);
-        });
-    });
-    });
-    
+        // if (continueFilter.length != 0) {
+        //     continueFilter.push(selButton);
+        // }
+        // else {
+        //     status = "filtered"
+        // }
+    }
+    else if (selButton === "State") {
+        var selVariable = selOption;
+        var type = "state";
+        var status = "new";
+        d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
+    }
+    else if (selButton === "Country") {
+        var selVariable = selOption;
+        var type = "country";
+        var status = "new";
+        d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
+    }
+    else if (selButton === "Shape") {
+        var selVariable = selOption;
+        var type = "shape";
+        var status = "new";
+        d3.select("#chosen-option-shape").text(`${selButton}: ${selOption}`);
+    }
 
+    console.log(selVariable);
+    console.log(type);
+    console.log(status);
 
+    runSelect(selVariable, type, status);
+
+}); 
 });
 
-// On click -- run the function
-stateButton.on("click", function() {
-    var selStateButton = d3.select(this).text();
-    console.log(selStateButton);
+// The select function (filters by each parameter)
+function runSelect(selVariable, type, status) {
 
-    d3.selectAll("option").on("click", function() {
-        var selState = d3.select(this).text();
-        console.log(selState);
+    runReset();
 
-    var filteredData = tableData.filter(element => element.state === selState);
+    if (status === "new") {
+        // Filter the data to the selection
+        var filteredData = tableData.filter(element => element[type] === selVariable);
+    }
+    else if (status === "filtered") {
+        filteredData = filteredData.filter(element => element[type] === selVariable);
+    };
 
-    // Print the sightings for the city in the console
-    console.log("Sightings: ", filteredData);
-
-    // Select the tbody in the html table
-    var tbody = d3.select("tbody");
-
-    // Remove previous filtered data from the table
-    tbody.html("");
-
-    // Loop through the filtered data array of objects
-    filteredData.forEach(sightings => {
-
-        // Print each object in the console
-        console.log(sightings);
-        // Append a row to the tbody
-        var row = tbody.append("tr");
-    
-
-        Object.entries(sightings).forEach(([key, value]) => {
-            console.log(key, value);
-    
-            var data_cell = row.append("td").text(value);
-        });
-    });
-    });
-});
-
-// On click -- run the function
-countryButton.on("click", function() {
-    var selCountryButton = d3.select(this).text();
-    console.log(selCountryButton);
-
-    d3.selectAll("option").on("click", function() {
-        var selCountry = d3.select(this).text();
-        console.log(selCountry);
-
-        var filteredData = tableData.filter(element => element.country === selCountry);
-
-    // Print the sightings for the city in the console
-    console.log("Sightings: ", filteredData);
-
-    // Select the tbody in the html table
-    var tbody = d3.select("tbody");
-
-    // Remove previous filtered data from the table
-    tbody.html("");
-
-    // Loop through the filtered data array of objects
-    filteredData.forEach(sightings => {
-
-        // Print each object in the console
-        console.log(sightings);
-        // Append a row to the tbody
-        var row = tbody.append("tr");
-    
-
-        Object.entries(sightings).forEach(([key, value]) => {
-            console.log(key, value);
-    
-            var data_cell = row.append("td").text(value);
-        });
-    });
-    });
-});
-
-// On click -- run the function
-shapeButton.on("click", function() {
-    var selShapeButton = d3.select(this).text();
-    console.log(selShapeButton);
-
-    d3.selectAll("option").on("click", function() {
-        var selShape = d3.select(this).text();
-        console.log(selShape);
-
-        var filteredData = tableData.filter(element => element.shape === selShape);
-
-    // Print the sightings for the city in the console
-    console.log("Sightings: ", filteredData);
-
-    // Select the tbody in the html table
-    var tbody = d3.select("tbody");
-
-    // Remove previous filtered data from the table
-    tbody.html("");
-
-    // Loop through the filtered data array of objects
-    filteredData.forEach(sightings => {
-
-        // Print each object in the console
-        console.log(sightings);
-        // Append a row to the tbody
-        var row = tbody.append("tr");
-    
-
-        Object.entries(sightings).forEach(([key, value]) => {
-            console.log(key, value);
-    
-            var data_cell = row.append("td").text(value);
-        });
-    });
-    });
-
-    
-});
-
-// Function for running when option selected
-function runSelect() {
-
-    // Keep the page from refreshing
     d3.event.preventDefault();
 
-    // Select the selected city
-    //var selCity = d3.select("#cityDropdown").this;
-    //console.log(selCity);
-
-    // Print the input date in the console
-    //console.log("Date: ", inputDatetime);
-
-    // Add chosen input date into span tag (on page)
-    //d3.select("label>span").text(inputDatetime);
-    if (selCityButton) {
-    //     // Filter the table for the selected city
-        var filteredData = tableData.filter(element => element.city === selCity);
-    }
-    // else if ( == State) {
-    //     // Filter the table for the selected state
-    // var filteredData = tableData.filter(element => element.state === inputDatetime);
-    // }
-    // else if ( == Country) {
-    //     // Filter the table for the selected country
-    // var filteredData = tableData.filter(element => element.country === inputDatetime);
-    // }
-    // else if ( == Shape) {
-    //     // Filter the table for the selected shape
-    // var filteredData = tableData.filter(element => element.shape === inputDatetime);
-    // }
-    // Print the sightings for the date in the console
+    // Print the sightings for the city in the console
     console.log("Sightings: ", filteredData);
-
-    // Select the tbody in the html table
-    var tbody = d3.select("tbody");
-
-    // Remove previous filtered data from the table
-    tbody.html("");
 
     // Loop through the filtered data array of objects
     filteredData.forEach(sightings => {
+
+       // Select the tbody in the html table
+        var tbody = d3.select("tbody");
 
         // Print each object in the console
         console.log(sightings);
         // Append a row to the tbody
         var row = tbody.append("tr");
-    
+
 
         Object.entries(sightings).forEach(([key, value]) => {
             console.log(key, value);
-    
+
             var data_cell = row.append("td").text(value);
         });
     });
