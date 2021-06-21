@@ -1,3 +1,4 @@
+// LEVEL 1
 // Import data from data.js
 var tableData = data;
 
@@ -54,6 +55,7 @@ function runEnter() {
     });
 };
 
+// LEVEL 2
 // Select each dropdown section
 var cityDropdown = d3.select("#cityDropdown");
 var stateDropdown = d3.select("#stateDropdown");
@@ -66,41 +68,26 @@ var stateButton = d3.select(".btn-state");
 var countryButton = d3.select(".btn-country");
 var shapeButton = d3.select(".btn-shape");
 
-// Select each dropdown attribute
-var citySelect = d3.select("#cityDropdown");
-var stateSelect = d3.select("#stateDropdown>a");
-var countrySelect = d3.select("#countryDropdown>a");
-var shapeSelect = d3.select("#shapeDropdown>a");
-
-d3.selectAll("option").on("click", function() {
-    var selCity = d3.select(this);
-    console.log(selCity);
-    var cityText = selCity.text();
-    console.log(cityText);
-})
-// On click -- run the function
-// cityButton.on("click", function() {
-//     console.log(this);
-//     var selCityButton = d3.select(this);
-// });
-
-stateButton.on("click", function() {
-    console.log(this)
-});
-countryButton.on("click", function() {
-    console.log(this)
-});
-shapeButton.on("click", function() {
-    console.log(this)
-});
+// Select each dropdown option
+// var citySelect = d3.select("#cityDropdown");
+// var stateSelect = d3.select("#stateDropdown");
+// var countrySelect = d3.select("#countryDropdown");
+// var shapeSelect = d3.select("#shapeDropdown");
 
 // DROPDOWN MENUS
 // Create a city name array
-var cityName = tableData.map(sighting => sighting.city)
+var cityName = tableData.map(sighting => sighting.city);
 //console.log(cityName);
 
+// GET RID OF DUPLICATES
+// Convert the array to a set
+var setCityNames = new Set(cityName);
+// Convert the set back into an array
+var uniqueCityNames = Array.from(setCityNames);
+
+
 // For each city, append the name to a dropdown attribute
-cityName.forEach(city => {
+uniqueCityNames.forEach(city => {
     //console.log(city);
     var item = cityDropdown.append("option");
     item.attr("id", city);
@@ -109,14 +96,21 @@ cityName.forEach(city => {
 });
 
 // Create a state name array
-var stateName = tableData.map(sighting => sighting.state)
+var stateName = tableData.map(sighting => sighting.state);
 //console.log(stateName);
 
+// GET RID OF DUPLICATES
+// Convert the array to a set
+var setStateNames = new Set(stateName);
+// Convert the set back into an array
+var uniqueStateNames = Array.from(setStateNames);
+//console.log(uniqueStateNames);
+
 // For each state, append the name to a dropdown attribute
-stateName.forEach(state => {
-    //console.log(state);
-    var item = stateDropdown.append("a")
-    item.attr("class", "dropdown-item")
+uniqueStateNames.forEach(state => {
+    console.log(state);
+    var item = stateDropdown.append("option");
+    item.attr("class", "dropdown-item");
     item.text(state);
 });
 
@@ -124,10 +118,16 @@ stateName.forEach(state => {
 var countryName = tableData.map(sighting => sighting.country)
 //console.log(countryName);
 
+// GET RID OF DUPLICATES
+// Convert the array to a set
+var setCountryNames = new Set(countryName);
+// Convert the set back into an array
+var uniqueCountryNames = Array.from(setCountryNames);
+
 // For each country, append the name to a dropdown attribute
-countryName.forEach(country => {
+uniqueCountryNames.forEach(country => {
     //console.log(country);
-    var item = countryDropdown.append("a")
+    var item = countryDropdown.append("option")
     item.attr("class", "dropdown-item")
     item.text(country);
 });
@@ -136,12 +136,64 @@ countryName.forEach(country => {
 var shapeName = tableData.map(sighting => sighting.shape)
 //console.log(shapeName);
 
+// GET RID OF DUPLICATES
+// Convert the array to a set
+var setShapeNames = new Set(shapeName);
+// Convert the set back into an array
+var uniqueShapeNames = Array.from(setShapeNames);
+
 // For each shape, append the name to a dropdown attribute
-shapeName.forEach(shape => {
+uniqueShapeNames.forEach(shape => {
     //console.log(city);
-    var item = shapeDropdown.append("a")
+    var item = shapeDropdown.append("option")
     item.attr("class", "dropdown-item")
     item.text(shape);
+});
+
+// Show which button was clicked in the console
+// On click -- run the function
+cityButton.on("click", function() {
+    var selCityButton = d3.select(this).text();
+    console.log(selCityButton);
+
+    d3.selectAll("option").on("click", function() {
+        var selCity = d3.select(this).text();
+        console.log(selCity);
+    });
+
+});
+
+// On click -- run the function
+stateButton.on("click", function() {
+    var selStateButton = d3.select(this).text();
+    console.log(selStateButton);
+
+    d3.selectAll("option").on("click", function() {
+        var selState = d3.select(this).text();
+        console.log(selState);
+    });
+});
+
+// On click -- run the function
+countryButton.on("click", function() {
+    var selCountryButton = d3.select(this).text();
+    console.log(selCountryButton);
+
+    d3.selectAll("option").on("click", function() {
+        var selCountry = d3.select(this).text();
+        console.log(selCountry);
+    });
+});
+
+// On click -- run the function
+shapeButton.on("click", function() {
+    var selShapeButton = d3.select(this).text();
+    console.log(selShapeButton);
+
+    d3.selectAll("option").on("click", function() {
+        var selShape = d3.select(this).text();
+        console.log(selShape);
+    });
 });
 
 function runFilter() {
@@ -157,18 +209,19 @@ function runSelect() {
     // Keep the page from refreshing
     d3.event.preventDefault();
 
-    console.log(this);
     // Select the selected city
     //var selCity = d3.select("#cityDropdown").this;
     //console.log(selCity);
+
     // Print the input date in the console
     //console.log("Date: ", inputDatetime);
+
     // Add chosen input date into span tag (on page)
     //d3.select("label>span").text(inputDatetime);
-    // if ( == city) {
+    if (selCityButton) {
     //     // Filter the table for the selected city
-    var filteredData = tableData.filter(element => element.city === selCity);
-    // }
+        var filteredData = tableData.filter(element => element.city === selCity);
+    }
     // else if ( == State) {
     //     // Filter the table for the selected state
     // var filteredData = tableData.filter(element => element.state === inputDatetime);
