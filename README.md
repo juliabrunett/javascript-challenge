@@ -6,5 +6,5 @@
 - index.html (HTML for page)
 
 **UFO-level-2:** This folder contains the bonus assignment, which added dropdown buttons and multi-filtering to select certain filters (date, city, state, country, or shape), allowing the user to decide what information they want to see in the table.
-- *static:* css (styles.css), *images* (night_sky.jpg from url, ufo.svg from url), *js* (app.js, data.js)
+- *static:* ***css*** (styles.css), ***images*** (night_sky.jpg from url, ufo.svg from url), ***js*** (app.js, data.js)
 - index.html (HTML for page)
