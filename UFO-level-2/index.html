@@ -43,9 +43,12 @@
                         <!--Panel-->
                         <div class="panel panel-default">
                             <!--Panel Heading-->
-                            <div class="panel-heading">Filter the Table!</div>
+                            <div class="panel-heading">Filters:</div>
                             <hr/>
-                            <button id="reset-button" type="button" class="btn btn-default">Reset Table</button>
+                            <div class ="text-center">
+                                <button id="reset-button" type="button" class="btn btn-default">Reset Table</button>
+                            </div>
+                            <hr/>
                             <!--Panel Body-->
                             <div class="panel-body">
                                 
@@ -57,7 +60,33 @@
                                     <p id="chosen-option-shape"></p>
                                 </div>
                                 <p id="num-results"></p>
+                            <!--Country Dropdown-->
+                            <div class="dropdown dropright">
+                                <button class="btn btn-secondary dropdown-toggle btn-country" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country</button>
+                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="countryDropdown">  
+                                </div>
+                            </div>
 
+                            <!--State Dropdown-->
+                            <div class="dropdown dropright">
+                                <button class="btn btn-secondary dropdown-toggle btn-state" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State</button>
+                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="stateDropdown">
+                                </div>
+                            </div>
+
+                            <!--City Dropdown-->
+                            <div class="dropdown dropright">
+                                <button class="btn btn-secondary dropdown-toggle btn-city" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City</button>
+                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="cityDropdown">
+                                </div>
+                            </div>
+
+                            <!--Shape Dropdown-->
+                            <div class="dropdown dropright">
+                                <button class="btn btn-secondary dropdown-toggle btn-shape" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shape</button>
+                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="shapeDropdown">
+                                </div>
+                            </div>
                                 <!--Form-->
                                 <form id="form">
                                     <!--Form Group-->
@@ -78,7 +107,9 @@
                                                 <p>1/1/2010-1/13/2010</p>
                                             </div>
                                                 <!--Button for submitting form-->
+                                            <div class="text-center">
                                                 <button id="filter-button" type="button" class="btn btn-default">Filter by Date</button>
+                                            </div>
                                             </li>
                                         </ul>
                                         
@@ -94,33 +125,7 @@
 
                 
 
-                <!--Country Dropdown-->
-                <div class="dropdown dropright">
-                    <button class="btn btn-secondary dropdown-toggle btn-country" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Country</button>
-                    <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="countryDropdown">  
-                    </div>
-                </div>
-            
-                <!--State Dropdown-->
-                <div class="dropdown dropright">
-                    <button class="btn btn-secondary dropdown-toggle btn-state" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State</button>
-                    <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="stateDropdown">
-                    </div>
-                </div>
-
-                <!--City Dropdown-->
-                <div class="dropdown dropright">
-                    <button class="btn btn-secondary dropdown-toggle btn-city" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">City</button>
-                    <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="cityDropdown">
-                    </div>
-                </div>
-
-                <!--Shape Dropdown-->
-                <div class="dropdown dropright">
-                    <button class="btn btn-secondary dropdown-toggle btn-shape" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shape</button>
-                    <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton" id="shapeDropdown">
-                    </div>
-                </div>
+                
 
             </div>
                 

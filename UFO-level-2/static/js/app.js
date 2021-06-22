@@ -173,38 +173,47 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
     console.log("Option: ", selOption);
 
 
+    // If the city button is selected --> push these values to the 2 arrays
     if (selButton === "City") {
         selVariable.push(selOption);
         type.push("city");
         
+        // Update the chosen filter value on the page
         d3.select("#chosen-option-city").text(`${selButton}: ${selOption}`);
 
     }
+    // If the state button is selected --> push these values to the 2 arrays
     else if (selButton === "State") {
         selVariable.push(selOption);
         type.push("state");
         
+        // Update the chosen filter value on the page
         d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
 
     }
+    // If the country button is selected --> push these values to the 2 arrays
     else if (selButton === "Country") {
         selVariable.push(selOption);
         type.push("country");
         
+        // Update the chosen filter value on the page
         d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
 
     }
+    // If the shape button is selected --> push these values to the 2 arrays
     else if (selButton === "Shape") {
         selVariable.push(selOption);
         type.push("shape");
     
+        // Update the chosen filter value on the page
         d3.select("#chosen-option-shape").text(`${selButton}: ${selOption}`);
 
     }
 
+    // Run the select function
     runSelect(type, selVariable);
-    console.log(selVariable);
-    console.log(type);
+    // console.log(selVariable);
+    // console.log(type);
 
 }); 
 });
@@ -219,12 +228,15 @@ function runSelect(type, selVariable) {
         runHTMLReset();
 
         // Filter the data to the selection
-        var newFilteredData = tableData.filter(element => element[type[i-2]] === selVariable[i-2]);
-        var filteredData = newFilteredData.filter(element => element[type[i-1]] === selVariable[i-1]);
-        var filteredData = filteredData.filter(element => element[type[i]] === selVariable[i]);
+        var firstFilter = tableData.filter(element => element[type[i-4]] === selVariable[i-4]);
+        var secondFilter = firstFilter.filter(element => element[type[i-3]] === selVariable[i-3]);
+        var thirdFilter = secondFilter.filter(element => element[type[i-2]] === selVariable[i-2]);
+        var fourthFilter = thirdFilter.filter(element => element[type[i-1]] === selVariable[i-1]);
+        var filteredData = fourthFilter.filter(element => element[type[i]] === selVariable[i]);
 
-        console.log("Previous Filter", newFilteredData);
-        console.log("Filtered Data: ", filteredData);
+
+        // console.log("Previous Filter", newFilteredData);
+        // console.log("Filtered Data: ", filteredData);
 
     d3.event.preventDefault();
 
@@ -256,11 +268,11 @@ function runSelect(type, selVariable) {
     // Print number of results on page
         var num_results = filteredData.length;
         
-
+        // If results = 0, reset the table to avoid error
         if (num_results === 0) {
             console.log(`${num_results} Results, resetting table...`);
             runReset();
-            d3.select("#num-results").text(`Table Reset: No Results Found`);
+            d3.select("#num-results").text(`No Results Found.`);
         }
         else {
             d3.select("#num-results").text(`Showing ${num_results} Result(s)`);
