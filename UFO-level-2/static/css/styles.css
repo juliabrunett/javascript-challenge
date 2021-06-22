@@ -82,19 +82,13 @@ a {
 #filter-button {
     background-color: lightblue;
     position: relative;
-    /* margin-top: 10px;
-    margin-left: 45px; */
     border-color: black;
-    
 }
 
 /* Reset button */
 #reset-button {
     background-color: #f2c757;
     position: relative;
-    /* margin-bottom: 10px;
-    margin-left: 80px;
-    margin-right: 20px; */
     border-color: black;
 }
 

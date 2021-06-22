@@ -37,13 +37,13 @@
             <!--Row-->
             <div class="row margin-top-75">
                 <!--Column for Input Form-->
-                <div class="col-md-2 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <!--Aside with class: filters-->
                     <aside class="filters">
                         <!--Panel-->
                         <div class="panel panel-default">
                             <!--Panel Heading-->
-                            <div class="panel-heading">Search a Date!</div>
+                            <div class="panel-heading">Filters:</div>
                             <hr/>
                             <!--Panel Body-->
                             <div class="panel-body">
@@ -64,12 +64,15 @@
                                                 </label>
                                                 <!--Input: for date-->
                                                 <input class="form-control" id="datetime" type="text" placeholder="1/1/2010">
+                                            <!--Button for submitting form-->
+                                            <div class="text-center">
+                                                <button id="filter-button" type="button" class="btn btn-default">Filter by Date</button>
+                                            </div>
                                             </li>
                                         </ul>
                                     </div>
 
-                                    <!--Button for submitting form-->
-                                    <button id="filter-button" type="button" class="btn btn-default">Filter Table</button>
+                                    
                                 </form>
 
                             </div>
@@ -79,7 +82,7 @@
 
                 <!--Table of Data-->
                 <!--Column-->
-                <div class="col-md-10 col sm-12">
+                <div class="col-md-9 col sm-12">
                     <!--Table area-->
                     <div id="table-area">
                         <!--UFO Table-->

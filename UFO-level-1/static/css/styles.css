@@ -49,8 +49,8 @@ a {
 #filter-button {
     background-color: lightblue;
     position: relative;
-    margin-right: 20px;
-    margin-left: 30px;
+    border-color: black;
+   margin-top: 20px;
 }
 
 /* Panel Heading */
