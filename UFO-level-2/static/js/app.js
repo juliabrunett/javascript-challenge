@@ -11,8 +11,7 @@ var date_button = d3.select("#filter-button");
 // Select the reset button
 var reset_button = d3.select("#reset-button");
 
-
-// Create event handlers for clicking the button & submitting the form
+// Create event handlers for clicking the buttons & submitting the form
 date_button.on("click", runEnter);
 form.on("submit", runEnter);
 reset_button.on("click", runReset);
@@ -25,16 +24,19 @@ var type = [];
 function runReset() {
     // Select the tbody in the html table
     var tbody = d3.select("tbody");
+    // Reset the table
     tbody.html("");
 
+    // Reset the filter text
     d3.select("label>span").text("");
     d3.select("#chosen-option-city").text("");
     d3.select("#chosen-option-state").text("");
     d3.select("#chosen-option-country").text("");
     d3.select("#chosen-option-shape").text("");
     d3.select("#num-results").text("");
+    d3.select("#chosen-option-date").text("");
 
-    // Reset arrays
+    // Reset the multi-filtering arrays
     selVariable = [];
     type = [];
 };
@@ -43,12 +45,14 @@ function runReset() {
 function runHTMLReset() {
     // Select the tbody in the html table
     var tbody = d3.select("tbody");
+    // Reset the html table
     tbody.html("");
 }
 
-// Function for running when entered
+// Function for running when entered (for dates)
 function runEnter() {
 
+    // Reset the html
     runHTMLReset();
 
     // Keep the page from refreshing
@@ -59,14 +63,14 @@ function runEnter() {
 
     // Print the input date in the console
     console.log("Date: ", inputDatetime);
-    // Add chosen input date into span tag (on page)
-    d3.select("label>span").text(inputDatetime);
+    // Add chosen input date (on page)
+    d3.select("#chosen-option-date").text(`Date:  ${inputDatetime}`);
 
-    // Push variables to array
+    // Push variables to arrays
     selVariable.push(inputDatetime);
     type.push("datetime");
 
-    // Run the select function
+    // Run the select function - filters
     runSelect(type, selVariable);
 };
 
@@ -159,19 +163,16 @@ uniqueShapeNames.forEach(shape => {
     item.text(shape);
 });
 
-
-// SHOW which button was clicked in the console
+// Button actions
+// Show which button was clicked in the console
 d3.selectAll("#dropdownMenuButton").on("click", function() {
     var selButton = d3.select(this).text();
-    console.log(selButton);
+    console.log("Button: ", selButton);
 
+    // Show which option was clicked in the console
     d3.selectAll("option").on("click", function() {
         var selOption = d3.select(this).text();
-        console.log(selOption);
-
-    // Print the option in the console
-    console.log("Option: ", selOption);
-
+        console.log("Option: ", selOption);
 
     // If the city button is selected --> push these values to the 2 arrays
     if (selButton === "City") {
@@ -227,21 +228,17 @@ function runSelect(type, selVariable) {
         // Reset the HTML to blank
         runHTMLReset();
 
-        // Filter the data to the selection
+        // Filter the data to the selection (5 different filter variables to ensure each filter is used)
         var firstFilter = tableData.filter(element => element[type[i-4]] === selVariable[i-4]);
         var secondFilter = firstFilter.filter(element => element[type[i-3]] === selVariable[i-3]);
         var thirdFilter = secondFilter.filter(element => element[type[i-2]] === selVariable[i-2]);
         var fourthFilter = thirdFilter.filter(element => element[type[i-1]] === selVariable[i-1]);
         var filteredData = fourthFilter.filter(element => element[type[i]] === selVariable[i]);
 
-
-        // console.log("Previous Filter", newFilteredData);
-        // console.log("Filtered Data: ", filteredData);
-
     d3.event.preventDefault();
 
-    // Print the sightings for the city in the console
-    console.log("Sightings: ", filteredData);
+    // Print the sightings for the filtered data in the console
+    //console.log("Sightings: ", filteredData);
 
     // Loop through the filtered data array of objects
     filteredData.forEach(sightings => {
