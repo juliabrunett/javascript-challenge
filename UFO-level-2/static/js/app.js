@@ -64,6 +64,10 @@ function runReset() {
     // Reset the multi-filtering arrays
     selVariable = [];
     type = [];
+    multiCity = [];
+    multiState = [];
+    multiCountry = [];
+    multiShape = [];
     
     // Initialize the page again
     init();
@@ -154,6 +158,7 @@ uniqueStateNames.forEach(state => {
 });
 
 
+
 // Create a country name array
 var countryName = tableData.map(sighting => sighting.country)
 //console.log(countryName);
@@ -191,10 +196,13 @@ uniqueShapeNames.forEach(shape => {
     item.text(shape);
 });
 
-// Define an array for holding each option
-var multipleOptionsChosen = [];
+// Define arrays for multi-filtering
+multiCity = [];
+multiState = [];
+multiCountry = [];
+multiShape = [];
 
-// Button actions
+// BUTTON ACTIONS
 // Show which button was clicked in the console
 d3.selectAll("#dropdownMenuButton").on("click", function() {
     var selButton = d3.select(this).text();
@@ -203,9 +211,6 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
     // Show which option was clicked in the console
     d3.selectAll("option").on("click", function() {
         var selOption = d3.select(this).text();
-
-        multipleOptionsChosen.push(selOption);
-
         console.log("Option: ", selOption);
 
     // If the city button is selected --> push these values to the 2 arrays
@@ -213,15 +218,17 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("city");
         
+        // Push variables to its own array
+        multiCity.push(selOption);
+
         // Reset the whole text area for this category
         d3.select("#chosen-option-city").html("");
 
         // Update the chosen filter value on the page
-        for (var i = 0; i < selVariable.length; i++) {
+        for (var i = 0; i < multiCity.length; i++) {
             
              // Append text for this category
-            d3.select("#chosen-option-city").append("p").attr("id", `chosen-option-city${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
-            
+            d3.select("#chosen-option-city").append("p").attr("id", `chosen-option-city${i+1}`).text(`${selButton}: ${multiCity[i]}`); 
             
         };
 
@@ -231,16 +238,17 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("state");
         
+        // Push variables to its own array
+        multiState.push(selOption);
+
         // Reset the whole text area for this category
         d3.select("#chosen-option-state").html("");
 
         // Update the chosen filter value on the page
-        // d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
-        for (var i = 0; i < selVariable.length; i++) {    
+        for (var i = 0; i < multiState.length; i++) {    
 
             // Append text for this category
-            d3.select("#chosen-option-state").append("p").attr("id", `chosen-option-state${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
-    
+            d3.select("#chosen-option-state").append("p").attr("id", `chosen-option-state${i+1}`).text(`${selButton}: ${multiState[i]}`); 
         };
 
     }
@@ -249,15 +257,17 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("country");
         
+        // Push variables to its own array
+        multiCountry.push(selOption);
+
         // Reset the whole text area for this category
         d3.select("#chosen-option-country").html("");
 
         // Update the chosen filter value on the page
-        // d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
-        for (var i = 0; i < selVariable.length; i++) {
+        for (var i = 0; i < multiCountry.length; i++) {
 
             // Append text for this category
-            d3.select("#chosen-option-country").append("p").attr("id", `chosen-option-country${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
+            d3.select("#chosen-option-country").append("p").attr("id", `chosen-option-country${i+1}`).text(`${selButton}: ${multiCountry[i]}`); 
         };
 
     }
@@ -266,14 +276,17 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("shape");
     
+        // Push variables to its own array
+        multiShape.push(selOption);
+
         // Reset the whole text area for this category
         d3.select(`#chosen-option-shape`).html("");
 
         // Update the chosen filter value on the page
-        for (var i = 0; i < selVariable.length; i++) {
+        for (var i = 0; i < multiShape.length; i++) {
                 
             // Append text for this category
-            d3.select("#chosen-option-shape").append("p").attr("id", `chosen-option-shape${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
+            d3.select("#chosen-option-shape").append("p").attr("id", `chosen-option-shape${i+1}`).text(`${selButton}: ${multiShape[i]}`); 
             
         };
 
