@@ -20,8 +20,33 @@ reset_button.on("click", runReset);
 var selVariable = [];
 var type = [];
 
+// Initialize the page with all of the data
+function init() {
+
+    // DATA TABLE INITIALIZER
+    tableData.forEach(sightings => {
+
+        // Select the tbody in the html table
+        var tbody = d3.select("tbody");
+
+         // Append a row to the tbody
+        var row = tbody.append("tr");
+        
+        Object.entries(sightings).forEach(([key, value]) => {
+             // console.log(key, value);
+            var data_cell = row.append("td").text(value);
+        });
+    });
+
+    // RESULTS COUNTER
+    // Print number of results on page
+    var num_results = tableData.length;
+    d3.select("#num-results").text(`Showing ${num_results} Result(s)`);
+};
+
 // Define the reset button function
 function runReset() {
+    
     // Select the tbody in the html table
     var tbody = d3.select("tbody");
     // Reset the table
@@ -29,16 +54,23 @@ function runReset() {
 
     // Reset the filter text
     d3.select("label>span").text("");
-    d3.select("#chosen-option-city").text("");
-    d3.select("#chosen-option-state").text("");
-    d3.select("#chosen-option-country").text("");
-    d3.select("#chosen-option-shape").text("");
-    d3.select("#num-results").text("");
-    d3.select("#chosen-option-date").text("");
+    d3.selectAll("#chosen-option-city").text("");
+    d3.selectAll("#chosen-option-state").text("");
+    d3.selectAll("#chosen-option-country").text("");
+    d3.selectAll("#chosen-option-shape").text("");
+    d3.selectAll("#num-results").text("");
+    d3.selectAll("#chosen-option-date").text("");
 
     // Reset the multi-filtering arrays
     selVariable = [];
     type = [];
+    multiCity = [];
+    multiState = [];
+    multiCountry = [];
+    multiShape = [];
+    
+    // Initialize the page again
+    init();
 };
 
 // Define the reset button (only resets HTML - when needed)
@@ -126,6 +158,7 @@ uniqueStateNames.forEach(state => {
 });
 
 
+
 // Create a country name array
 var countryName = tableData.map(sighting => sighting.country)
 //console.log(countryName);
@@ -163,7 +196,13 @@ uniqueShapeNames.forEach(shape => {
     item.text(shape);
 });
 
-// Button actions
+// Define arrays for multi-filtering
+multiCity = [];
+multiState = [];
+multiCountry = [];
+multiShape = [];
+
+// BUTTON ACTIONS
 // Show which button was clicked in the console
 d3.selectAll("#dropdownMenuButton").on("click", function() {
     var selButton = d3.select(this).text();
@@ -179,8 +218,19 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("city");
         
+        // Push variables to its own array
+        multiCity.push(selOption);
+
+        // Reset the whole text area for this category
+        d3.select("#chosen-option-city").html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-city").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < multiCity.length; i++) {
+            
+             // Append text for this category
+            d3.select("#chosen-option-city").append("p").attr("id", `chosen-option-city${i+1}`).text(`${selButton}: ${multiCity[i]}`); 
+            
+        };
 
     }
     // If the state button is selected --> push these values to the 2 arrays
@@ -188,8 +238,18 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("state");
         
+        // Push variables to its own array
+        multiState.push(selOption);
+
+        // Reset the whole text area for this category
+        d3.select("#chosen-option-state").html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < multiState.length; i++) {    
+
+            // Append text for this category
+            d3.select("#chosen-option-state").append("p").attr("id", `chosen-option-state${i+1}`).text(`${selButton}: ${multiState[i]}`); 
+        };
 
     }
     // If the country button is selected --> push these values to the 2 arrays
@@ -197,8 +257,18 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("country");
         
+        // Push variables to its own array
+        multiCountry.push(selOption);
+
+        // Reset the whole text area for this category
+        d3.select("#chosen-option-country").html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < multiCountry.length; i++) {
+
+            // Append text for this category
+            d3.select("#chosen-option-country").append("p").attr("id", `chosen-option-country${i+1}`).text(`${selButton}: ${multiCountry[i]}`); 
+        };
 
     }
     // If the shape button is selected --> push these values to the 2 arrays
@@ -206,8 +276,19 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("shape");
     
+        // Push variables to its own array
+        multiShape.push(selOption);
+
+        // Reset the whole text area for this category
+        d3.select(`#chosen-option-shape`).html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-shape").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < multiShape.length; i++) {
+                
+            // Append text for this category
+            d3.select("#chosen-option-shape").append("p").attr("id", `chosen-option-shape${i+1}`).text(`${selButton}: ${multiShape[i]}`); 
+            
+        };
 
     }
 
@@ -268,11 +349,14 @@ function runSelect(type, selVariable) {
         // If results = 0, reset the table to avoid error
         if (num_results === 0) {
             console.log(`${num_results} Results, resetting table...`);
-            runReset();
-            d3.select("#num-results").text(`No Results Found.`);
+            // runReset();
+            d3.select("#num-results").text(`No Results Found. Reset the table to try new filters.`);
         }
         else {
             d3.select("#num-results").text(`Showing ${num_results} Result(s)`);
         }
 
 };
+
+// Run the page initializing function
+init();
