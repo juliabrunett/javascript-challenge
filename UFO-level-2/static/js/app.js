@@ -20,8 +20,33 @@ reset_button.on("click", runReset);
 var selVariable = [];
 var type = [];
 
+// Initialize the page with all of the data
+function init() {
+
+    // DATA TABLE INITIALIZER
+    tableData.forEach(sightings => {
+
+        // Select the tbody in the html table
+        var tbody = d3.select("tbody");
+
+         // Append a row to the tbody
+        var row = tbody.append("tr");
+        
+        Object.entries(sightings).forEach(([key, value]) => {
+             // console.log(key, value);
+            var data_cell = row.append("td").text(value);
+        });
+    });
+
+    // RESULTS COUNTER
+    // Print number of results on page
+    var num_results = tableData.length;
+    d3.select("#num-results").text(`Showing ${num_results} Result(s)`);
+};
+
 // Define the reset button function
 function runReset() {
+    
     // Select the tbody in the html table
     var tbody = d3.select("tbody");
     // Reset the table
@@ -29,16 +54,19 @@ function runReset() {
 
     // Reset the filter text
     d3.select("label>span").text("");
-    d3.select("#chosen-option-city").text("");
-    d3.select("#chosen-option-state").text("");
-    d3.select("#chosen-option-country").text("");
-    d3.select("#chosen-option-shape").text("");
-    d3.select("#num-results").text("");
-    d3.select("#chosen-option-date").text("");
+    d3.selectAll("#chosen-option-city").text("");
+    d3.selectAll("#chosen-option-state").text("");
+    d3.selectAll("#chosen-option-country").text("");
+    d3.selectAll("#chosen-option-shape").text("");
+    d3.selectAll("#num-results").text("");
+    d3.selectAll("#chosen-option-date").text("");
 
     // Reset the multi-filtering arrays
     selVariable = [];
     type = [];
+    
+    // Initialize the page again
+    init();
 };
 
 // Define the reset button (only resets HTML - when needed)
@@ -163,6 +191,9 @@ uniqueShapeNames.forEach(shape => {
     item.text(shape);
 });
 
+// Define an array for holding each option
+var multipleOptionsChosen = [];
+
 // Button actions
 // Show which button was clicked in the console
 d3.selectAll("#dropdownMenuButton").on("click", function() {
@@ -172,6 +203,9 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
     // Show which option was clicked in the console
     d3.selectAll("option").on("click", function() {
         var selOption = d3.select(this).text();
+
+        multipleOptionsChosen.push(selOption);
+
         console.log("Option: ", selOption);
 
     // If the city button is selected --> push these values to the 2 arrays
@@ -179,8 +213,17 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("city");
         
+        // Reset the whole text area for this category
+        d3.select("#chosen-option-city").html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-city").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < selVariable.length; i++) {
+            
+             // Append text for this category
+            d3.select("#chosen-option-city").append("p").attr("id", `chosen-option-city${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
+            
+            
+        };
 
     }
     // If the state button is selected --> push these values to the 2 arrays
@@ -188,8 +231,17 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("state");
         
+        // Reset the whole text area for this category
+        d3.select("#chosen-option-state").html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
+        // d3.select("#chosen-option-state").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < selVariable.length; i++) {    
+
+            // Append text for this category
+            d3.select("#chosen-option-state").append("p").attr("id", `chosen-option-state${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
+    
+        };
 
     }
     // If the country button is selected --> push these values to the 2 arrays
@@ -197,8 +249,16 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("country");
         
+        // Reset the whole text area for this category
+        d3.select("#chosen-option-country").html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
+        // d3.select("#chosen-option-country").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < selVariable.length; i++) {
+
+            // Append text for this category
+            d3.select("#chosen-option-country").append("p").attr("id", `chosen-option-country${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
+        };
 
     }
     // If the shape button is selected --> push these values to the 2 arrays
@@ -206,8 +266,16 @@ d3.selectAll("#dropdownMenuButton").on("click", function() {
         selVariable.push(selOption);
         type.push("shape");
     
+        // Reset the whole text area for this category
+        d3.select(`#chosen-option-shape`).html("");
+
         // Update the chosen filter value on the page
-        d3.select("#chosen-option-shape").text(`${selButton}: ${selOption}`);
+        for (var i = 0; i < selVariable.length; i++) {
+                
+            // Append text for this category
+            d3.select("#chosen-option-shape").append("p").attr("id", `chosen-option-shape${i+1}`).text(`${type[i]}: ${selVariable[i]}`); 
+            
+        };
 
     }
 
@@ -268,11 +336,14 @@ function runSelect(type, selVariable) {
         // If results = 0, reset the table to avoid error
         if (num_results === 0) {
             console.log(`${num_results} Results, resetting table...`);
-            runReset();
-            d3.select("#num-results").text(`No Results Found.`);
+            // runReset();
+            d3.select("#num-results").text(`No Results Found. Reset the table to try new filters.`);
         }
         else {
             d3.select("#num-results").text(`Showing ${num_results} Result(s)`);
         }
 
 };
+
+// Run the page initializing function
+init();
