@@ -324,7 +324,7 @@ function runSelect(type, selVariable) {
     // Loop through the filtered data array of objects
     filteredData.forEach(sightings => {
 
-       // Select the tbody in the html table
+        // Select the tbody in the html table
         var tbody = d3.select("tbody");
 
         // Print each object in the console
